@@ -14,7 +14,7 @@ class CursoController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Curso::all());
     }
 
     /**
@@ -35,7 +35,11 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        try {
+            return response()->json(Curso::create($request->all()), 201);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage());
+        }
     }
 
     /**
